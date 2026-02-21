@@ -20,6 +20,21 @@ The key state is the cumulative result of processing a KEL from inception throug
 
 ## State transitions
 
+```mermaid
+stateDiagram-v2
+    [*] --> KeyState: Icp (initialState)
+    KeyState --> KeyState: Rot (rotate keys)
+    KeyState --> KeyState: Ixn (anchor data)
+    KeyState --> KeyState: Rct (no-op)
+
+    note right of KeyState
+        Guards checked on every transition:
+        - seqNum = prev + 1
+        - prefix matches
+        - not Icp
+    end note
+```
+
 ### `initialState`
 
 Creates the initial key state from an inception event. Requires:
@@ -28,6 +43,19 @@ Creates the initial key state from an inception event. Requires:
 - No prior digest
 
 ### `applyEvent`
+
+```mermaid
+graph TD
+    E[Event] --> CHK_SEQ{"seqNum =<br/>state.seqNum + 1?"}
+    CHK_SEQ -->|no| NONE1[none]
+    CHK_SEQ -->|yes| CHK_PFX{"prefix<br/>matches?"}
+    CHK_PFX -->|no| NONE2[none]
+    CHK_PFX -->|yes| CHK_TYPE{"event type?"}
+    CHK_TYPE -->|Icp| NONE3["none (rejected)"]
+    CHK_TYPE -->|Rot| ROT["Update keys,<br/>next-key commitments,<br/>witnesses"]
+    CHK_TYPE -->|Ixn| IXN["Update seqNum,<br/>lastDigest"]
+    CHK_TYPE -->|Rct| RCT["Return state<br/>unchanged"]
+```
 
 Applies a non-inception event to an existing state. Validates:
 

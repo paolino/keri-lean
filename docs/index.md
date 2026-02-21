@@ -2,7 +2,20 @@
 
 Lean 4 formalization of [KERI](https://keri.one/) (Key Event Receipt Infrastructure) protocol invariants.
 
-This project extracts and proves the core invariants of KERI — the protocol for decentralized key management — as machine-checked theorems in Lean 4. The formalization covers:
+This project extracts and proves the core invariants of KERI — the protocol for decentralized key management — as machine-checked theorems in Lean 4.
+
+```mermaid
+graph TD
+    KERI["KERI Protocol"] --> |formalized as| LEAN["Lean 4 Theorems"]
+    LEAN --> CRYPTO["Crypto axioms"]
+    LEAN --> CESR["CESR encoding"]
+    LEAN --> EVENT["Event structure"]
+    LEAN --> KEYSTATE["Key state machine"]
+    LEAN --> KEL["KEL integrity"]
+    LEAN --> PREROT["Pre-rotation"]
+```
+
+The formalization covers:
 
 - **Cryptographic primitives** — axiomatized abstract types for digests, signatures, and keys
 - **CESR encoding** — derivation code sizes and roundtrip properties

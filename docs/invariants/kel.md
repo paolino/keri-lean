@@ -4,6 +4,14 @@
 
 ## Hash chain validity
 
+```mermaid
+graph LR
+    E0["Event 0<br/>seq=0<br/>prior=none"] --> E1["Event 1<br/>seq=1<br/>prior=H(E0)"]
+    E1 --> E2["Event 2<br/>seq=2<br/>prior=H(E1)"]
+    E2 --> E3["Event 3<br/>seq=3<br/>prior=H(E2)"]
+    E3 --> EN["..."]
+```
+
 The fundamental integrity property of any KEL is its hash chain: each event (except inception) links to its predecessor via a prior digest, and sequence numbers form a contiguous sequence starting from 0.
 
 ```
@@ -58,6 +66,15 @@ This connects the replay function to the initialization function.
 This handles the degenerate case (useful for testing).
 
 ## Replay function
+
+```mermaid
+graph LR
+    EVENTS["[Icp, Rot, Ixn, ...]"] --> INIT["initialState(Icp)"]
+    INIT -->|"some ks₀"| FOLD["foldlM applyEvent"]
+    INIT -->|none| FAIL1[none]
+    FOLD -->|"some ks_n"| FINAL["Final KeyState"]
+    FOLD -->|none| FAIL2["none (invalid event)"]
+```
 
 `replay` processes events oldest-first:
 

@@ -4,6 +4,26 @@
 
 ## The pre-rotation mechanism
 
+```mermaid
+sequenceDiagram
+    participant Owner
+    participant KEL
+
+    Note over Owner,KEL: Inception / Rotation
+    Owner->>KEL: Publish commitKey(nextKey₁), commitKey(nextKey₂)
+    Note over KEL: Commitments stored in key state
+
+    Note over Owner,KEL: Later: Key Rotation
+    Owner->>KEL: Reveal nextKey₁, nextKey₂
+    KEL->>KEL: verifyCommitment(nextKey₁, commitment₁)?
+    KEL->>KEL: verifyCommitment(nextKey₂, commitment₂)?
+    KEL-->>Owner: Rotation accepted
+
+    Note over Owner,KEL: Attacker scenario
+    Owner->>KEL: Attacker has current keys but NOT next keys
+    KEL--xOwner: Cannot forge rotation (commitments don't match)
+```
+
 Pre-rotation is KERI's key innovation for forward-secure key management. The idea:
 
 1. At inception (or rotation), you publish **commitments** to your next key set — `commitKey(nextKey)` for each key
