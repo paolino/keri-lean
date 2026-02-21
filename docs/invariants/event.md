@@ -21,7 +21,19 @@ This structure was originally defined in kelgroups and is extracted here so any 
 
 ## KERI event payloads
 
-KERI defines four event types:
+```mermaid
+graph TD
+    EP[EventPayload]
+    EP --> ICP["Icp<br/><i>Inception</i>"]
+    EP --> ROT["Rot<br/><i>Rotation</i>"]
+    EP --> IXN["Ixn<br/><i>Interaction</i>"]
+    EP --> RCT["Rct<br/><i>Receipt</i>"]
+
+    ICP -.- ICP_D["prefix, keys,<br/>next-key commitments,<br/>witnesses"]
+    ROT -.- ROT_D["new keys,<br/>new commitments,<br/>witness changes"]
+    IXN -.- IXN_D["data anchors<br/>(digests)"]
+    RCT -.- RCT_D["receipted<br/>event digest"]
+```
 
 | Type | Purpose | Key fields |
 |------|---------|------------|

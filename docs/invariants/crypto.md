@@ -16,6 +16,18 @@ All cryptographic types are abbreviations over `Nat`. This gives us decidable eq
 
 ## Operations
 
+```mermaid
+graph LR
+    SK[SecretKey] -->|derivePublic| PK[Key]
+    SK -->|sign| SIG[Signature]
+    PK -->|verify| BOOL[Bool]
+    SIG -->|verify| BOOL
+    PK -->|commitKey| DIG[Digest]
+    PK -->|verifyCommitment| BOOL2[Bool]
+    DIG -->|verifyCommitment| BOOL2
+    ANY[Nat] -->|hash| DIG2[Digest]
+```
+
 | Operation | Signature | Purpose |
 |-----------|-----------|---------|
 | `hash` | `Nat → Digest` | Cryptographic hash |
@@ -28,6 +40,21 @@ All cryptographic types are abbreviations over `Nat`. This gives us decidable eq
 All operations are declared `opaque` — their implementations are not visible to the prover, ensuring theorems rely only on the stated axioms.
 
 ## Axioms
+
+```mermaid
+graph TD
+    subgraph sign_verify
+        SK1[sk] -->|sign| SIG1[sig]
+        SK1 -->|derivePublic| PK1[pk]
+        PK1 -->|"verify pk msg sig"| TRUE1["true ✓"]
+        SIG1 -->|"verify pk msg sig"| TRUE1
+    end
+    subgraph commit_verify
+        K1[k] -->|commitKey| C1[commitment]
+        K1 -->|"verifyCommitment k c"| TRUE2["true ✓"]
+        C1 -->|"verifyCommitment k c"| TRUE2
+    end
+```
 
 ### `sign_verify`
 

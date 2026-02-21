@@ -6,6 +6,15 @@
 
 CESR (Composable Event Streaming Representation) is KERI's binary encoding format. Each primitive consists of a derivation code prefix followed by raw cryptographic material, all Base64-encoded to a fixed total length.
 
+```mermaid
+graph LR
+    subgraph Primitive
+        CODE[Code prefix] --- RAW[Raw bytes]
+    end
+    Primitive -->|encode| B64[Base64 string]
+    B64 -->|decode| Primitive
+```
+
 ## Derivation codes
 
 | Code | Prefix length | Raw size (bytes) | Total length (Base64 chars) |
@@ -33,6 +42,13 @@ Each derivation code determines exact sizes. The formalization proves these as d
 This prevents malformed primitives from entering the system.
 
 ### Roundtrip property
+
+```mermaid
+graph LR
+    P["Primitive (code, raw)"] -->|encode| N[Nat]
+    N -->|decode| P2["Some (code, raw)"]
+    P -.-|"= (when well-formed)"| P2
+```
 
 **`roundtrip`**: For any well-formed primitive, `decode(encode(p)) = p`.
 
