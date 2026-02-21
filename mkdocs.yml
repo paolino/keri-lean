@@ -1,0 +1,37 @@
+site_name: keri-lean
+site_description: Lean 4 formalization of KERI protocol invariants
+repo_url: https://github.com/paolino/keri-lean
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+nav:
+  - Home: index.md
+  - Invariants:
+    - Overview: invariants/overview.md
+    - Cryptographic Primitives: invariants/crypto.md
+    - CESR Encoding: invariants/cesr.md
+    - Event Structure: invariants/event.md
+    - Key State Machine: invariants/keystate.md
+    - KEL Integrity: invariants/kel.md
+    - Pre-Rotation: invariants/prerotation.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+  - toc:
+      permalink: true
