@@ -30,6 +30,7 @@ nav:
     - Key State Machine: invariants/keystate.md
     - KEL Integrity: invariants/kel.md
     - Pre-Rotation: invariants/prerotation.md
+  - Roadmap: roadmap.md
 
 markdown_extensions:
   - admonition

@@ -9,19 +9,23 @@ graph TD
     Crypto["KERI.Crypto<br/><i>Abstract primitives</i>"]
     CESR["KERI.CESR<br/><i>Encoding properties</i>"]
     Event["KERI.Event<br/><i>KELEvent, payloads</i>"]
+    SAID["KERI.SAID<br/><i>SAID verification</i>"]
     KeyState["KERI.KeyState<br/><i>State machine</i>"]
     KEL["KERI.KEL<br/><i>Hash chain, replay</i>"]
     PreRot["KERI.PreRotation<br/><i>Commitment scheme</i>"]
 
     Crypto --> CESR
     Crypto --> Event
+    Crypto --> SAID
     Crypto --> PreRot
+    Event --> SAID
+    SAID --> KeyState
     Event --> KeyState
     Event --> KEL
     KeyState --> KEL
 ```
 
-`Crypto` provides the abstract primitives. `Event` defines the generic event structure (shared with kelgroups). `KeyState`, `KEL`, and `PreRotation` build the KERI-specific invariants on top.
+`Crypto` provides the abstract primitives. `Event` defines the generic event structure (shared with kelgroups). `SAID` models self-addressing identifier verification. `KeyState`, `KEL`, and `PreRotation` build the KERI-specific invariants on top.
 
 ## Axiom / theorem boundary
 
@@ -32,6 +36,8 @@ graph LR
         A2[hash_deterministic]
         A3[commit_verify]
         A4[roundtrip_ax]
+        A5[said_creation_correct]
+        A6[inception_prefix_is_said]
     end
     subgraph Theorems["Theorems (proven)"]
         T1[sign_then_verify]
@@ -41,12 +47,16 @@ graph LR
         T5[initial_state_seq_zero]
         T6[kel_starts_with_inception]
         T7[verify_prerotation_correct]
+        T8[verify_said_correct]
+        T9[initial_state_requires_said]
     end
 
     A1 --> T1
     A3 --> T2
     A3 --> T7
     A4 --> T3
+    A5 --> T8
+    A6 --> T9
 ```
 
 **Axioms** are assumptions about the cryptographic layer that cannot be proven without a concrete implementation:
@@ -57,6 +67,8 @@ graph LR
 | `hash_deterministic` | Crypto | Hashing is a function |
 | `commit_verify` | Crypto | `verifyCommitment(k, commitKey(k))` succeeds |
 | `roundtrip_ax` | CESR | `decode(encode(p)) = p` for well-formed primitives |
+| `said_creation_correct` | SAID | Events built via SAID protocol pass `verifySAID` |
+| `inception_prefix_is_said` | SAID | For verified inception, prefix = `claimedDigest` |
 
 **Theorems** are proven consequences that follow from the definitions and axioms:
 
@@ -65,7 +77,8 @@ graph LR
 | 3 | Crypto | `sign_then_verify`, `commitment_verify_correct` |
 | 7 | CESR | `ed25519_pub_total_length`, `roundtrip`, `primitive_size_valid` |
 | 4 | Event | `inception_type`, `prefix_consistent_icp` |
-| 6 | KeyState | `initial_state_seq_zero`, `apply_rejects_inception`, `receipt_neutral` |
+| 3 | SAID | `verify_said_correct`, `verify_said_implies_authentic`, `self_addressing_verified` |
+| 8 | KeyState | `initial_state_seq_zero`, `apply_rejects_inception`, `receipt_neutral`, `initial_state_requires_said`, `apply_requires_said` |
 | 5 | KEL | `singleton_chain_valid`, `kel_starts_with_inception`, `replay_inception_gives_initial` |
 | 3 | PreRotation | `commit_verify_roundtrip`, `verify_prerotation_singleton` |
 
