@@ -16,13 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install elan
-        run: |
-          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
-          echo "$HOME/.elan/bin" >> $GITHUB_PATH
-
-      - name: Install just
-        uses: extractions/setup-just@v2
+      - uses: paolino/dev-assets/setup-nix@v0.0.1
+        with:
+          cachix-auth-token: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: CI
-        run: just ci
+        run: nix develop --quiet -c just ci

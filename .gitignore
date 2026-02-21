@@ -2,3 +2,5 @@
 lake-packages/
 build/
 .llm/
+result
+site/

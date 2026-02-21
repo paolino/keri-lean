@@ -17,12 +17,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - uses: paolino/dev-assets/setup-nix@v0.0.1
         with:
-          python-version: '3.12'
-
-      - name: Install mkdocs
-        run: pip install mkdocs-material mkdocs-mermaid2-plugin
+          cachix-auth-token: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Deploy docs
-        run: mkdocs gh-deploy --force
+        run: nix develop --quiet -c just deploy-docs
