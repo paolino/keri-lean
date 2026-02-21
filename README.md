@@ -1,6 +1,8 @@
 # keri-lean
 
-Lean 4 formalization of KERI protocol invariants.
+Lean 4 formalization of [KERI](https://keri.one/) protocol invariants.
+
+**[Documentation](https://paolino.github.io/keri-lean/)**
 
 ## Modules
 
@@ -14,7 +16,15 @@ Lean 4 formalization of KERI protocol invariants.
 ## Build
 
 ```
+nix develop -c just ci
+```
+
+Or without nix (requires elan):
+
+```
 lake build
 ```
 
-Requires Lean 4.27.0 (set via `lean-toolchain`).
+## License
+
+[Apache-2.0](LICENSE)
