@@ -23,6 +23,19 @@ format:
 # Full CI pipeline
 ci: lint format build
 
+# Build docs (uses mkdocs from nix shell)
+build-docs:
+    mkdocs build
+
+# Serve docs locally (uses mkdocs from nix shell)
+serve-docs:
+    mkdocs serve
+
+# Deploy docs to GitHub Pages
+deploy-docs:
+    mkdocs gh-deploy --force
+
 # Clean build artifacts
 clean:
     lake clean
+    rm -rf site/
