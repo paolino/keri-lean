@@ -1,0 +1,1203 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Lean 4 formalization of KERI protocol invariants">
+      
+      
+      
+      
+        <link rel="prev" href="../invariants/prerotation/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Roadmap - keri-lean</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#roadmap" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="keri-lean" class="md-header__button md-logo" aria-label="keri-lean" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            keri-lean
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Roadmap
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/paolino/keri-lean" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="keri-lean" class="md-nav__button md-logo" aria-label="keri-lean" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    keri-lean
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/paolino/keri-lean" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Invariants
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Invariants
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../invariants/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../invariants/crypto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cryptographic Primitives
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../invariants/cesr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CESR Encoding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../invariants/event/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../invariants/keystate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Key State Machine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../invariants/kel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KEL Integrity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../invariants/prerotation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pre-Rotation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#current-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current state
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current state">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#formalized-in-keri-lean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formalized in keri-lean
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implemented-in-keri-hs-keri-purs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implemented in keri-hs / keri-purs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-identifier-creation-helper-kelgroups-step-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Identifier creation helper (kelgroups Step 10)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-witness-threshold-enforcement-kelgroups-step-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Witness threshold enforcement (kelgroups Step 12)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-receipt-verification-kelgroups-step-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Receipt verification (kelgroups Step 12)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-witness-rotation-kelgroups-step-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Witness rotation (kelgroups Step 12)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-duplicity-detection-kelgroups-step-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Duplicity detection (kelgroups Step 13)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#companion-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Companion projects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not needed
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#current-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current state
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current state">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#formalized-in-keri-lean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formalized in keri-lean
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implemented-in-keri-hs-keri-purs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implemented in keri-hs / keri-purs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-identifier-creation-helper-kelgroups-step-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Identifier creation helper (kelgroups Step 10)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-witness-threshold-enforcement-kelgroups-step-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Witness threshold enforcement (kelgroups Step 12)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-receipt-verification-kelgroups-step-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Receipt verification (kelgroups Step 12)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-witness-rotation-kelgroups-step-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Witness rotation (kelgroups Step 12)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-duplicity-detection-kelgroups-step-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Duplicity detection (kelgroups Step 13)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#companion-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Companion projects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not needed
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">&para;</a></h1>
+<p>Features needed in keri-lean (and their keri-hs / keri-purs implementations)
+to support the <a href="https://github.com/paolino/kelgroups/blob/main/docs/docs/roadmap.md">kelgroups roadmap</a>.</p>
+<h2 id="current-state">Current state<a class="headerlink" href="#current-state" title="Permanent link">&para;</a></h2>
+<h3 id="formalized-in-keri-lean">Formalized in keri-lean<a class="headerlink" href="#formalized-in-keri-lean" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>What it covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KERI.Crypto</code></td>
+<td>Abstract primitives: keys, signatures, digests, hashing (4 axioms)</td>
+</tr>
+<tr>
+<td><code>KERI.CESR</code></td>
+<td>Derivation codes, encoding sizes, roundtrip property</td>
+</tr>
+<tr>
+<td><code>KERI.Event</code></td>
+<td>Generic <code>KELEvent α</code>, KERI <code>EventPayload</code> (Icp/Rot/Ixn/Rct), event classification</td>
+</tr>
+<tr>
+<td><code>KERI.SAID</code></td>
+<td>SAID verification: <code>verifySAID</code>, <code>computeSAID</code>, <code>claimedDigest</code> (2 axioms, 3 theorems)</td>
+</tr>
+<tr>
+<td><code>KERI.KeyState</code></td>
+<td>State machine: <code>initialState</code>, <code>applyEvent</code> with SAID guard, pre-rotation (8 theorems)</td>
+</tr>
+<tr>
+<td><code>KERI.KEL</code></td>
+<td>Hash chain validity, replay, signature threshold (5 theorems)</td>
+</tr>
+<tr>
+<td><code>KERI.PreRotation</code></td>
+<td>Commitment scheme: <code>commitKey</code>, <code>verifyPreRotation</code> (3 theorems)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="implemented-in-keri-hs-keri-purs">Implemented in keri-hs / keri-purs<a class="headerlink" href="#implemented-in-keri-hs-keri-purs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>keri-hs module</th>
+<th>keri-purs module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CESR encoding/decoding</td>
+<td><code>Keri.Cesr.*</code></td>
+<td><code>Keri.Cesr.*</code></td>
+</tr>
+<tr>
+<td>Ed25519 signatures</td>
+<td><code>Keri.Crypto.Ed25519</code></td>
+<td><code>Keri.Crypto.Ed25519</code></td>
+</tr>
+<tr>
+<td>Blake3 digest (via Blake2b)</td>
+<td><code>Keri.Crypto.Digest</code></td>
+<td><code>Keri.Crypto.Digest</code></td>
+</tr>
+<tr>
+<td>Event creation (icp/rot/ixn)</td>
+<td><code>Keri.Event.Inception</code>, <code>.Rotation</code>, <code>.Interaction</code></td>
+<td>same</td>
+</tr>
+<tr>
+<td>SAID verification</td>
+<td><code>Keri.Crypto.SAID</code></td>
+<td><code>Keri.Crypto.SAID</code></td>
+</tr>
+<tr>
+<td>KEL append + replay</td>
+<td><code>Keri.Kel.Append</code>, <code>Keri.Kel.Replay</code></td>
+<td>same</td>
+</tr>
+<tr>
+<td>Key state machine</td>
+<td><code>Keri.KeyState</code></td>
+<td><code>Keri.KeyState</code></td>
+</tr>
+<tr>
+<td>Signature verification</td>
+<td><code>Keri.KeyState.Verify</code></td>
+<td><code>Keri.KeyState.Verify</code></td>
+</tr>
+<tr>
+<td>Pre-rotation commitment</td>
+<td><code>Keri.KeyState.PreRotation</code></td>
+<td><code>Keri.KeyState.PreRotation</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="roadmap_1">Roadmap<a class="headerlink" href="#roadmap_1" title="Permanent link">&para;</a></h2>
+<h3 id="1-identifier-creation-helper-kelgroups-step-10">1. Identifier creation helper (kelgroups Step 10)<a class="headerlink" href="#1-identifier-creation-helper-kelgroups-step-10" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> not started
+<strong>Needed for:</strong> KEL-managed identities in kelgroups</p>
+<p>Currently the caller has to orchestrate <code>mkInception</code> + sign + <code>append emptyKel</code>
+manually. Provide a convenience function that creates an inception event, signs
+it, appends to a new KEL, and returns the prefix + KEL.</p>
+<p><strong>keri-hs / keri-purs:</strong></p>
+<ul>
+<li>New function in <code>Keri.Kel</code>: <code>createIdentifier :: KeyPair -&gt; InceptionConfig -&gt; Either String (Prefix, Kel)</code></li>
+<li>Wraps the inception + sign + append sequence</li>
+</ul>
+<p><strong>keri-lean:</strong></p>
+<ul>
+<li>No new formalization needed — <code>initialState</code> and <code>replay</code> already cover inception</li>
+</ul>
+<h3 id="2-witness-threshold-enforcement-kelgroups-step-12">2. Witness threshold enforcement (kelgroups Step 12)<a class="headerlink" href="#2-witness-threshold-enforcement-kelgroups-step-12" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> not started
+<strong>Needed for:</strong> witness receipts</p>
+<p><code>InceptionConfig</code> has <code>icWitnesses</code> and <code>icWitnessThreshold</code>, and <code>KeyState</code>
+stores them, but <code>append</code> ignores witness threshold entirely. Receipt events
+(<code>Rct</code>) exist but are not collected or verified against witness keys.</p>
+<p><strong>keri-lean:</strong></p>
+<ul>
+<li>Formalize <code>witnessThresholdMet</code>: receipt count from distinct witnesses
+  meets <code>stateWitnessThreshold</code></li>
+<li>Add <code>witnessThresholdMet</code> as a guard in event confirmation (separate from
+  <code>append</code> — events can be appended but not confirmed until receipted)</li>
+<li>Theorem: confirmed events have sufficient witness receipts</li>
+</ul>
+<p><strong>keri-hs / keri-purs:</strong></p>
+<ul>
+<li>Track pending receipts per event in KEL management</li>
+<li><code>collectReceipt :: Kel -&gt; Receipt -&gt; Either String Kel</code> — verify receipt
+  signature against witness key, accumulate</li>
+<li><code>isConfirmed :: Kel -&gt; SequenceNumber -&gt; Bool</code> — check if witness threshold
+  met for a given event</li>
+<li>Enforce witness threshold in <code>append</code> (configurable: strict mode rejects
+  unreceipted events, permissive mode accepts but marks unconfirmed)</li>
+</ul>
+<h3 id="3-receipt-verification-kelgroups-step-12">3. Receipt verification (kelgroups Step 12)<a class="headerlink" href="#3-receipt-verification-kelgroups-step-12" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> not started
+<strong>Needed for:</strong> witness receipts</p>
+<p>Receipt events carry a receipted event digest and a witness signature. Need
+to verify that the receipt references a real event and the signature matches
+a configured witness key.</p>
+<p><strong>keri-lean:</strong></p>
+<ul>
+<li>Formalize <code>receiptValid</code>: receipt digest matches an event in the KEL,
+  receipt signer is in <code>stateWitnesses</code></li>
+<li>Currently <code>receipt_neutral</code> proves receipts don't change state; add
+  <code>receipt_valid_implies_witness</code> — valid receipt signer must be a witness</li>
+</ul>
+<p><strong>keri-hs / keri-purs:</strong></p>
+<ul>
+<li><code>verifyReceipt :: KeyState -&gt; Kel -&gt; SignedEvent -&gt; Either String ()</code> —
+  check receipt references existing event, signer is a witness, signature valid</li>
+</ul>
+<h3 id="4-witness-rotation-kelgroups-step-12">4. Witness rotation (kelgroups Step 12)<a class="headerlink" href="#4-witness-rotation-kelgroups-step-12" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> not started
+<strong>Needed for:</strong> witness lifecycle management</p>
+<p><code>RotationConfig</code> has <code>rcWitnessConfig</code> (add/remove witnesses) but <code>applyEvent</code>
+ignores it — <code>KeyState.stateWitnesses</code> is set at inception and never updated.</p>
+<p><strong>keri-lean:</strong></p>
+<ul>
+<li>Update <code>applyEvent</code> for rotation to apply <code>WitnessConfig</code> changes to
+  <code>stateWitnesses</code></li>
+<li>Theorem: <code>rotation_updates_witnesses</code> — after rotation with witness config,
+  <code>stateWitnesses</code> reflects the additions and removals</li>
+</ul>
+<p><strong>keri-hs / keri-purs:</strong></p>
+<ul>
+<li>Update <code>applyEvent</code> rotation case to apply witness adds/removes</li>
+<li>Tests: witness rotation round-trip, receipt rejected after witness removal</li>
+</ul>
+<h3 id="5-duplicity-detection-kelgroups-step-13">5. Duplicity detection (kelgroups Step 13)<a class="headerlink" href="#5-duplicity-detection-kelgroups-step-13" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> not started
+<strong>Needed for:</strong> detecting compromised server publishing conflicting KELs</p>
+<p>No mechanism exists to detect two valid but conflicting KELs for the same
+prefix (same inception, diverging at some sequence number).</p>
+<p><strong>keri-lean:</strong></p>
+<ul>
+<li>Define <code>duplicitous</code>: two KELs share the same prefix (inception event)
+  but contain different events at some sequence number</li>
+<li>Theorem: <code>hashChainValid</code> + same inception + different event at sequence N
+  implies different digest chains from N onward (divergence is permanent)</li>
+<li>Theorem: a duplicitous pair cannot both be valid if witnesses are honest
+  (at least one receipt set must be forged)</li>
+</ul>
+<p><strong>keri-hs / keri-purs:</strong></p>
+<ul>
+<li><code>detectDuplicity :: Kel -&gt; Kel -&gt; Maybe DuplicityEvidence</code> — compare two
+  KELs for the same prefix, return the first divergence point</li>
+<li><code>DuplicityEvidence</code> contains: prefix, sequence number, the two conflicting
+  events, and their respective receipt sets</li>
+</ul>
+<h2 id="companion-projects">Companion projects<a class="headerlink" href="#companion-projects" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Role</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>keri-hs</strong></td>
+<td>Haskell implementation</td>
+<td><a href="https://github.com/paolino/keri-hs">github.com/paolino/keri-hs</a></td>
+</tr>
+<tr>
+<td><strong>keri-purs</strong></td>
+<td>PureScript implementation (browser)</td>
+<td><a href="https://github.com/paolino/keri-purs">github.com/paolino/keri-purs</a></td>
+</tr>
+<tr>
+<td><strong>kelgroups</strong></td>
+<td>Governance layer (consumer)</td>
+<td><a href="https://github.com/paolino/kelgroups">github.com/paolino/kelgroups</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="not-needed">Not needed<a class="headerlink" href="#not-needed" title="Permanent link">&para;</a></h2>
+<p>These KERI features are not required by kelgroups:</p>
+<ul>
+<li><strong>Weighted thresholds</strong> — kelgroups uses simple admin majority</li>
+<li><strong>Delegated identifiers</strong> — no hierarchical delegation</li>
+<li><strong>OOBI protocol</strong> — centralized server stores all participant KELs</li>
+<li><strong>Indirect mode networking</strong> — direct HTTP</li>
+<li><strong>Out-of-order event escrow</strong> — nice to have but not blocking</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
